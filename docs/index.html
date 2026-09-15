@@ -2,271 +2,176 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0f0f0f">
-  <title>LocalAI - IA Locale 100% Securisee</title>
-  <meta name="description" content="Assistant IA 100% local, aucune donnee ne quitte votre appareil. Chiffre, ecologique, open source.">
+  <title>LocalAI - Chat IA Local</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
 </head>
 <body>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-badge">Open Source - 100% Local</div>
-      <h1 class="hero-title">
-        🔒 <span class="gradient-text">LocalAI</span>
-      </h1>
-      <p class="hero-subtitle">Votre assistant IA 100% local et securise.<br>Aucune donnee ne quitte jamais votre appareil.</p>
-      <div class="hero-buttons">
-        <a href="https://github.com/fr3nchh/AIGFE" class="btn btn-primary" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          Voir sur GitHub
-        </a>
-        <a href="#installation" class="btn btn-secondary">
-          Installer LocalAI
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-icon">🔒</span>
-          <span class="stat-label">Zero fuite</span>
-        </div>
-        <div class="stat">
-          <span class="stat-icon">🌱</span>
-          <span class="stat-label">Eco-responsable</span>
-        </div>
-        <div class="stat">
-          <span class="stat-icon">📱</span>
-          <span class="stat-label">Multi-appareils</span>
-        </div>
-        <div class="stat">
-          <span class="stat-icon">🔓</span>
-          <span class="stat-label">Non censure</span>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Auth Screen -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-container">
+      <div class="auth-logo">🔒</div>
+      <h1 class="auth-title">LocalAI</h1>
+      <p class="auth-subtitle">IA Locale 100% Securisee</p>
 
-  <!-- Features -->
-  <section class="section" id="features">
-    <div class="container">
-      <h2 class="section-title">Pourquoi LocalAI ?</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🏠</div>
-          <h3>100% Local</h3>
-          <p>Tout tourne sur votre machine. Aucune donnee n'est envoyee vers le cloud, les serveurs, ou n'importe ou.</p>
+      <!-- Login Form -->
+      <div id="loginForm" class="auth-form">
+        <h2>Connexion</h2>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="votre@email.com" autocomplete="email">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔐</div>
-          <h3>Chiffrement AES-256</h3>
-          <p>Toutes les conversations sont chiffrees avec AES-256-GCM cote client. Meme le serveur ne peut pas les lire.</p>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" id="loginPassword" placeholder="Votre mot de passe" autocomplete="current-password">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🚫</div>
-          <h3>Zero Telemetry</h3>
-          <p>Pas de tracking, pas d'analytics, pas de compte. Aucune information n'est collectee, jamais.</p>
+        <button id="loginBtn" class="btn btn-primary btn-full">Se connecter</button>
+        <p class="auth-switch">Pas encore de compte ? <a href="#" id="showRegister">Creer un compte</a></p>
+        <div id="loginError" class="auth-error hidden"></div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="registerForm" class="auth-form hidden">
+        <h2>Creer un compte</h2>
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" id="regName" placeholder="Votre nom" autocomplete="name">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌱</div>
-          <h3>Mode Eco</h3>
-          <p>Reduisez la consommation d'energie avec des reponses courtes et des modeles legers optimises.</p>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="regEmail" placeholder="votre@email.com" autocomplete="email">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3>Multi-appareils</h3>
-          <p>Phone, PC, tablette - meme interface responsive. Accessible depuis tout votre reseau local.</p>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" id="regPassword" placeholder="6 caracteres minimum" autocomplete="new-password">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔓</div>
-          <h3>Non Censure</h3>
-          <p>Modeles non censures disponibles : Dolphin, Gemma Abliterated. Aucune restriction artificielle.</p>
+        <div class="form-group">
+          <label>Confirmer</label>
+          <input type="password" id="regPasswordConfirm" placeholder="Confirmez le mot de passe" autocomplete="new-password">
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Rapide</h3>
-          <p>Interface moderne et fluide, streaming en temps reel, reponses instantanees sur votre hardware.</p>
+        <button id="registerBtn" class="btn btn-primary btn-full">Creer mon compte</button>
+        <p class="auth-switch">Deja un compte ? <a href="#" id="showLogin">Se connecter</a></p>
+        <div id="registerError" class="auth-error hidden"></div>
+      </div>
+
+      <p class="auth-footer">100% Local - Aucune donnee ne quitte votre appareil</p>
+    </div>
+  </div>
+
+  <!-- Chat App -->
+  <div id="chatApp" class="chat-app hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <button id="newChatBtn" class="btn btn-new-chat">
+          <span>+</span> Nouvelle discussion
+        </button>
+      </div>
+      <div id="conversationList" class="conversation-list"></div>
+      <div class="sidebar-footer">
+        <div class="user-info" id="userInfo">
+          <div class="user-avatar" id="userAvatar">U</div>
+          <span id="userName">Utilisateur</span>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛠️</div>
-          <h3>Open Source</h3>
-          <p>Code 100% transparent et auditable. Contribuez, amelorez, adaptez a vos besoins.</p>
+        <div class="sidebar-actions">
+          <button id="settingsBtn" class="icon-btn" title="Parametres">⚙️</button>
+          <button id="logoutBtn" class="icon-btn" title="Deconnexion">🚪</button>
         </div>
       </div>
-    </div>
-  </section>
+    </aside>
 
-  <!-- How it works -->
-  <section class="section section-dark" id="how">
-    <div class="container">
-      <h2 class="section-title">Comment ca marche ?</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Installe Docker</h3>
-            <p>Telechargez Docker Desktop sur votre machine. C'est gratuit et open source.</p>
-          </div>
+    <!-- Main Chat -->
+    <main class="main">
+      <header class="chat-header">
+        <button id="menuBtn" class="icon-btn menu-btn">☰</button>
+        <div class="model-selector">
+          <select id="modelSelect">
+            <option value="">Chargement...</option>
+          </select>
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>Lancez le script</h3>
-            <p>Un seul clic sur le script d'installation. Tout se configure automatiquement.</p>
-          </div>
+        <div class="header-status" id="headerStatus">
+          <span class="status-dot"></span>
+          <span>Connecte</span>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Installez un modele</h3>
-            <p>Choisissez parmi des dizaines de modeles : Qwen, Gemma, Llama, Dolphin...</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>Discutez !</h3>
-            <p>Ouvrez votre navigateur et parlez avec votre IA 100% locale et securisee.</p>
-          </div>
+      </header>
+
+      <!-- Welcome -->
+      <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-icon">🤖</div>
+        <h2>Bonjour, <span id="welcomeName">Utilisateur</span> !</h2>
+        <p>Je suis votre assistant IA local. Comment puis-je vous aider ?</p>
+        <div class="suggestions">
+          <button class="suggestion-card" data-prompt="Explique-moi comment fonctionne l'IA locale">
+            <span class="suggestion-icon">💡</span>
+            <span>Comment fonctionne l'IA locale ?</span>
+          </button>
+          <button class="suggestion-card" data-prompt="Ecris un petit programme Python pour calculer factorielle">
+            <span class="suggestion-icon">💻</span>
+            <span>Ecris un programme Python</span>
+          </button>
+          <button class="suggestion-card" data-prompt="Resume les avantages de l'IA open source vs l'IA proprietaire en 5 points">
+            <span class="suggestion-icon">📝</span>
+            <span>IA open source vs proprietaire</span>
+          </button>
+          <button class="suggestion-card" data-prompt="Donne-moi 5 idees de projets pour debuter en programmation">
+            <span class="suggestion-icon">🚀</span>
+            <span>5 idees de projets</span>
+          </button>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Installation -->
-  <section class="section" id="installation">
-    <div class="container">
-      <h2 class="section-title">Installation</h2>
-      <div class="install-methods">
-        <div class="install-card">
-          <h3>🪟 Windows</h3>
-          <pre><code>scripts\install-windows.bat</code></pre>
+      <!-- Messages -->
+      <div id="messagesContainer" class="messages-container hidden">
+        <div id="messages" class="messages"></div>
+      </div>
+
+      <!-- Input -->
+      <div class="input-area">
+        <div class="input-box">
+          <textarea id="messageInput" placeholder="Envoyez un message..." rows="1" autofocus></textarea>
+          <button id="sendBtn" class="send-btn" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
         </div>
-        <div class="install-card">
-          <h3>🐧 Linux</h3>
-          <pre><code>chmod +x scripts/install-linux.sh
-./scripts/install-linux.sh</code></pre>
-        </div>
-        <div class="install-card">
-          <h3>🍎 Mac</h3>
-          <pre><code>chmod +x scripts/install-mac.sh
-./scripts/install-mac.sh</code></pre>
-        </div>
-        <div class="install-card">
-          <h3>🐳 Manuel</h3>
-          <pre><code>docker compose up -d
-docker exec localai-ollama ollama pull qwen3:8b</code></pre>
+        <div class="input-info">
+          <span>🔒 Messages stockes localement - Aucun serveur externe</span>
         </div>
       </div>
-    </div>
-  </section>
+    </main>
+  </div>
 
-  <!-- Models -->
-  <section class="section section-dark" id="models">
-    <div class="container">
-      <h2 class="section-title">Modeles Recommandes</h2>
-      <div class="models-table-wrap">
-        <table class="models-table">
-          <thead>
-            <tr>
-              <th>Hardware</th>
-              <th>Modele</th>
-              <th>Taille</th>
-              <th>Usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>8 GB RAM</td>
-              <td><code>qwen3:8b</code></td>
-              <td>~5 GB</td>
-              <td>General, excellent</td>
-            </tr>
-            <tr>
-              <td>4 GB RAM</td>
-              <td><code>qwen3:2b</code></td>
-              <td>~2 GB</td>
-              <td>Rapide, PC modeste</td>
-            </tr>
-            <tr>
-              <td>16 GB RAM</td>
-              <td><code>qwen3:14b</code></td>
-              <td>~9 GB</td>
-              <td>Premium</td>
-            </tr>
-            <tr>
-              <td>24 GB+ RAM</td>
-              <td><code>qwen3:27b</code></td>
-              <td>~17 GB</td>
-              <td>Frontier</td>
-            </tr>
-            <tr>
-              <td>Non censure</td>
-              <td><code>dolphin3</code></td>
-              <td>~5 GB</td>
-              <td>Uncensored</td>
-            </tr>
-            <tr>
-              <td>PC modeste</td>
-              <td><code>phi4-mini</code></td>
-              <td>~3 GB</td>
-              <td>Intelligent, petit</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚙️ Parametres</h2>
+        <button class="icon-btn close-modal">&times;</button>
       </div>
-    </div>
-  </section>
-
-  <!-- Security -->
-  <section class="section" id="security">
-    <div class="container">
-      <h2 class="section-title">Securite</h2>
-      <div class="security-grid">
-        <div class="security-card">
-          <h3>🔐 Chiffrement</h3>
-          <p>AES-256-GCM cote client. La cle reste dans votre navigateur. Le serveur ne voit que du texte chiffre.</p>
+      <div class="modal-body">
+        <div class="setting-group">
+          <label>Mode Ecologique</label>
+          <p class="setting-desc">Reponses courtes pour economiser l'energie</p>
+          <label class="toggle"><input type="checkbox" id="ecoToggle" checked><span class="slider"></span></label>
         </div>
-        <div class="security-card">
-          <h3>🚫 Zero fuite</h3>
-          <p>Pas de telemetry, pas de tracking, pas de compte, pas d'analytics. Vos donnees restent chez vous.</p>
+        <div class="setting-group">
+          <label>Chiffrement</label>
+          <p class="setting-desc">Conversations chiffrees AES-256</p>
+          <label class="toggle"><input type="checkbox" id="encToggle" checked><span class="slider"></span></label>
         </div>
-        <div class="security-card">
-          <h3>👁️ Zero visibilite</h3>
-          <p>Meme le developpeur ne peut rien voir. Tout est local, tout est chiffre, tout est prive.</p>
+        <div class="setting-group">
+          <button id="clearDataBtn" class="btn btn-danger">Supprimer toutes mes donnees</button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CTA -->
-  <section class="section section-cta">
-    <div class="container">
-      <h2> Pret a essayer LocalAI ?</h2>
-      <p>Telechargez le code source et lancez votre assistant IA 100% local en 5 minutes.</p>
-      <a href="https://github.com/fr3nchh/AIGFE" class="btn btn-primary btn-large" target="_blank">
-        Telecharger sur GitHub
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>LocalAI - Open Source sous licence MIT</p>
-      <p class="footer-links">
-        <a href="https://github.com/fr3nchh/AIGFE" target="_blank">GitHub</a>
-        <span>|</span>
-        <a href="#features">Fonctionnalites</a>
-        <span>|</span>
-        <a href="#installation">Installation</a>
-        <span>|</span>
-        <a href="#security">Securite</a>
-      </p>
-    </div>
-  </footer>
-
+  <script src="js/app.js"></script>
 </body>
 </html>

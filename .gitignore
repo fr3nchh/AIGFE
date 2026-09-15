@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Data (encrypted conversations)
+data/
+*.enc
+
+# Environment
+.env
+.env.local
+
+# Docker
+ollama/
+models/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

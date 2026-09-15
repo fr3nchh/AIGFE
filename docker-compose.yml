@@ -1,0 +1,68 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: localai-ollama
+    volumes:
+      - ollama:/root/.ollama
+      - ./models:/models
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_KEEP_ALIVE=5m
+      - OLLAMA_MAX_LOADED_MODELS=2
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - localai-net
+
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: localai-webui
+    depends_on:
+      - ollama
+    volumes:
+      - open-webui:/app/backend/data
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-localai-secret-change-me}
+      - WEBUI_AUTH=true
+      - ENABLE_SIGNUP=true
+      - DEFAULT_MODELS=qwen3:8b
+      - OLLAMA_BASE_URLS=http://ollama:11434
+    restart: unless-stopped
+    networks:
+      - localai-net
+
+  ollama-webui-light:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: localai-light
+    depends_on:
+      - ollama
+    ports:
+      - "8080:3000"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - localai-net
+
+networks:
+  localai-net:
+    driver: bridge
+
+volumes:
+  ollama:
+  open-webui:
